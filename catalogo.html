@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineMatch Pro — Videoteca</title>
+  <meta name="description" content="Explore sua videoteca pessoal de filmes no CineMatch Pro.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">CINE<span>MATCH</span> PRO</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Cadastrar</a></li>
+        <li><a href="catalogo.html" class="active">Videoteca</a></li>
+        <li>
+          <a
+            href="https://www.imdb.com/chart/top/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-imdb"
+          >
+            Sugestões ↗
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <!-- Cabeçalho -->
+      <section class="page-hero">
+        <h1>MINHA <span>VIDEOTECA</span></h1>
+        <p>Todos os filmes que você catalogou. Clique em um card para assistir o trailer.</p>
+      </section>
+
+      <!-- Layout catálogo -->
+      <div class="catalog-layout">
+
+        <!-- Coluna principal -->
+        <section aria-label="Catálogo de filmes">
+
+          <!-- Barra de filtros -->
+          <div class="catalog-header">
+            <h2>FILMES CADASTRADOS</h2>
+            <div class="filter-bar" role="search">
+              <input
+                type="search"
+                id="busca"
+                placeholder="🔍 Buscar título…"
+                aria-label="Buscar filme por título"
+              >
+              <select id="filtro-genero" aria-label="Filtrar por gênero">
+                <option value="">Todos os gêneros</option>
+                <option value="Ação">Ação</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Animação">Animação</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasia">Fantasia</option>
+                <option value="Ficção Científica">Ficção Científica</option>
+                <option value="Horror">Horror</option>
+                <option value="Romance">Romance</option>
+                <option value="Suspense">Suspense</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Documentário">Documentário</option>
+                <option value="Outros">Outros</option>
+              </select>
+              <select id="filtro-ordem" aria-label="Ordenar filmes">
+                <option value="recente">Mais recentes</option>
+                <option value="titulo">A–Z</option>
+                <option value="nota">Melhor nota</option>
+                <option value="duracao">Mais longos</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid de cards (injetado pelo JS) -->
+          <div id="grid-filmes" role="list" aria-label="Lista de filmes cadastrados">
+            <!-- Cards gerados dinamicamente por display.js -->
+          </div>
+
+        </section>
+
+        <!-- Aside: estatísticas -->
+        <aside class="catalog-aside" aria-label="Estatísticas da videoteca">
+
+          <div class="stats-card">
+            <h3>ESTATÍSTICAS</h3>
+            <div class="stat-row">
+              <span class="stat-label">Total de filmes</span>
+              <span class="stat-value accent" id="cat-stat-total">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Tempo total</span>
+              <span class="stat-value" id="cat-stat-tempo">0h 0min</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Nota média</span>
+              <span class="stat-value accent" id="cat-stat-nota">★ 0.0</span>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <h3>TOP GÊNEROS</h3>
+            <div id="cat-stat-generos">
+              <span style="color:var(--text-muted);font-size:.85rem">Nenhum filme ainda</span>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <h3>AÇÕES RÁPIDAS</h3>
+            <div class="stat-row">
+              <span class="stat-label">Adicionar filme</span>
+              <a href="index.html" style="font-size:.85rem;font-weight:600">Cadastrar →</a>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Buscar mais filmes</span>
+              <a href="https://www.imdb.com/chart/top/" target="_blank" rel="noopener noreferrer" style="font-size:.85rem;font-weight:600">IMDb Top ↗</a>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== MODAL DE TRAILER ===== -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="modal-titulo">Trailer</h3>
+        <button id="modal-fechar" class="modal-close" aria-label="Fechar trailer">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe
+          id="modal-iframe"
+          src=""
+          title="Player de trailer do filme"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <p><span>CineMatch Pro</span> &mdash; Projeto SENAI · DEWFE · 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/display.js"></script>
+</body>
+</html>
